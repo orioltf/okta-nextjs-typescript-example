@@ -1,4 +1,5 @@
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
+import {sIn, sOut} from './helpers';
 
 export default function Header() {
 
@@ -7,9 +8,9 @@ export default function Header() {
 	let button;
 
 	if (session) {
-		button = <button className="btn btn-secondary" onClick={signOut}>Logout</button>;
+		button = <button className="btn btn-secondary" onClick={sOut}>Logout</button>;
 	} else {
-		button = <button className="btn btn-primary" onClick={signIn}>Login</button>;
+		button = <button className="btn btn-primary" onClick={sIn}>Login</button>;
 	}
 
 	return (

@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/client'
+import {sIn} from './helpers';
 
 export default function Unauthorized() {
 
@@ -9,7 +10,7 @@ export default function Unauthorized() {
 
 				<p>Please sign in here.</p>
 
-				<p><button className="btn btn-secondary" onClick={signIn}>Sign in</button></p>
+				<p><button className="btn btn-secondary" onClick={sIn}>Sign in</button></p>
 			</div>
 		</div>
 	)
