@@ -11,21 +11,21 @@ import { useSession } from 'next-auth/client'
 
 export default function Dashboard() {
 
-  const [session, loading] = useSession();
+	const [session, loading] = useSession();
 
-  var content = session ? <Movies></Movies> : <Unauthorized></Unauthorized>
+	var content = session ? <Movies></Movies> : <Unauthorized></Unauthorized>
 
-  return (
-    <div className="container">
-      <Head>
-        <title>Movies By Nik - Find Your Next Movie</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+	return (
+		<div className="container">
+			<Head>
+				<title>Movies By Nik - Find Your Next Movie</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
 
-      <Header></Header>
+			<Header></Header>
 
-      {content}
+			{content}
 
-    </div>
-  )
+		</div>
+	)
 }
