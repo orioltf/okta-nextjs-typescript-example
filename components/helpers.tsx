@@ -1,7 +1,7 @@
 import {signIn, signOut} from 'next-auth/client';
 
 export function sIn() {
-	signIn();
+	signIn('okta');
 }
 
 export function sOut() {
