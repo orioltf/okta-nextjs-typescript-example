@@ -33,9 +33,9 @@ export default function Header() {
 									<a className="nav-link" href="dashboard">Movies</a>
 								</li>
 							</ul>
-							<form className="d-flex">
+							<div className="d-flex">
 								{button}
-							</form>
+							</div>
 						</div>
 					</div>
 				</nav>
