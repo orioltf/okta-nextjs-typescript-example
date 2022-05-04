@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 
 import Header from '../components/Header'
 import Unauthorized from '../components/Unauthorized'
@@ -13,7 +12,14 @@ export default function Dashboard() {
 
 	const [session, loading] = useSession();
 
-	var content = session ? <Movies></Movies> : <Unauthorized></Unauthorized>
+	var content = loading
+		? (
+			<div className="row mb-4">
+				Loading…
+			</div>
+		)
+		: session
+			? <Movies></Movies> : <Unauthorized></Unauthorized>
 
 	return (
 		<div className="container">
