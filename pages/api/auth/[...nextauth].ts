@@ -8,15 +8,6 @@ const options = {
 			clientId: process.env.OKTA_CLIENTID,
 			clientSecret: process.env.OKTA_CLIENTSECRET,
 			domain: process.env.OKTA_DOMAIN,
-			/*profile: function (profile, token) {
-				console.log('profile function', profile, token);
-				return {
-					...profile,
-					...token,
-					id: profile.sub
-				}
-			},*/
-
 		}),
 		// ...add more providers here
 	],
