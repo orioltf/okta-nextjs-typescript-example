@@ -8,36 +8,46 @@ const options = {
 			clientId: process.env.OKTA_CLIENTID,
 			clientSecret: process.env.OKTA_CLIENTSECRET,
 			domain: process.env.OKTA_DOMAIN,
+			/*profile: function (profile, token) {
+				console.log('profile function', profile, token);
+				return {
+					...profile,
+					...token,
+					id: profile.sub
+				}
+			},*/
+
 		}),
 		// ...add more providers here
 	],
 	callbacks: {
-		async signin(...args) {
-			console.log('signin', args);
+		async signIn(userOrProfile, account, OAuthProfile, ...rest) {
+			console.log('signIn', userOrProfile, account, OAuthProfile, rest.length, rest);
+			// return a string with a url to perform a redirect
 			return true;
 		},
-		async session(...args) {
-			console.log('session', args);
-			return Promise.resolve({...args })
+		async session(defaultJwtPayload, session, ...rest) {
+			console.log('session', defaultJwtPayload, session, rest.length, rest);
+			return {
+				...session,
+				expires: defaultJwtPayload.expires,
+			};
 		},
 		/**
 		 * This callback is called whenever a JSON Web Token is created (i.e. at sign in) or updated (i.e whenever a session is accessed in the client).
-		 * @param token
+		 * @param defaultJwtPayload
 		 * @param user - The claims in Okta
 		 * @param account - Large object with all info from the JWT
-		 * @param profile - Same as user, without `id`
+		 * @param OAuthProfile - Same as user
 		 * @param {boolean} isNewUser
 		 * @param {[]} rest - should be empty
 		 */
-		async jwt(token, user, account, profile, isNewUser, ...rest) {
-			console.log('jwt', token, user, account, profile, isNewUser, rest.length, rest);
-			const newToken = {...token};
-			if (!newToken.claims) {
-				newToken.claims = user;
-				newToken.access_token = account.access_token;
-				newToken.accessToken = account.accessToken;
-			}
-			return newToken;
+		async jwt(defaultJwtPayload, user, account, OAuthProfile, isNewUser, ...rest) {
+			console.log('jwt', defaultJwtPayload, user, account, OAuthProfile, isNewUser, rest.length, rest);
+			return {
+				...defaultJwtPayload,
+				...user,
+			};
 		},
 	},
 }

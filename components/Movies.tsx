@@ -2,7 +2,8 @@ import {useSession} from 'next-auth/client';
 
 export default function Movies() {
 
-	const [...session] = useSession();
+	// status can be "loading" | "authenticated" | "unauthenticated"
+	const [session, /* status */] = useSession();
 
 	return (
 		<div className="row">
