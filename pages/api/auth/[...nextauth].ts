@@ -44,10 +44,17 @@ const options = {
 		 */
 		async jwt(defaultJwtPayload, user, account, OAuthProfile, isNewUser, ...rest) {
 			console.log('jwt', defaultJwtPayload, user, account, OAuthProfile, isNewUser, rest.length, rest);
-			return {
+
+			let newToken = {
 				...defaultJwtPayload,
 				...user,
 			};
+
+			if (account?.accessToken) {
+				newToken.accessToken = account.accessToken;
+			}
+
+			return newToken;
 		},
 	},
 }
